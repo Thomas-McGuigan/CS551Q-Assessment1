@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in</title>
+  <style>
+    body {
+      font-family: arial;
+      margin: 2rem;
+      background: cornsilk;
+      color: cornsilk;
+    }
+
+    main {
+      max-width: 28rem;
+      margin: 0 auto;
+      background: #800000;
+      padding: 2rem;
+      border: 1px solid #d8cfbf;
+    }
+
+    label,
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      color: cornsilk;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="{% url 'item_list' %}">Back to home</a></p>
+    <h1>Log in</h1>
+    <p>Demo users will be created by the seed command.</p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log in</button>
+    </form>
+  </main>
+</body>
+</html>

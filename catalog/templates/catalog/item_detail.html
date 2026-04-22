@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ item.title }}</title>
+  <style>
+   body {
+      font-family: arial;
+      margin: 2rem;
+      background: cornsilk;
+      color: cornsilk;
+    }
+
+    main {
+      max-width: 28rem;
+      margin: 0 auto;
+      background: #800000;
+      padding: 2rem;
+      border: 1px solid #d8cfbf;
+    }
+
+    label,
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      color: cornsilk;
+      text-decoration: none;
+    }
+    dt {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+     <div>
+        {% if request.user.is_authenticated %}
+          <p>Signed in as <strong>{{ request.user.username }}</strong></p>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
+      </div>
+    <p><a href="{% url 'item_list' %}">Back to all items</a></p>
+    <h1>{{ item.title }}</h1>
+    <dl>
+      
+      <dt>Movie ID</dt>
+      <dd>{{ item.source_code }}</dd>
+
+      <dt>MetaCritic Score</dt>
+      <dd>{{ item.metacritic|default:"-"}}</dd>
+      
+      <dt>IMDB Rating</dt>
+      <dd>{{ item.rating|default:"-"}}</dd>
+
+      <dt>Runtime</dt>
+      <dd>{{ item.runtime|default:"-" }}</dd>
+
+      <dt>Budget (USD)</dt>
+      <dd>{{ item.budget|default:"-" }}</dd>
+
+      
+
+     
+    </dl>
+  </main>
+</body>
+</html>
